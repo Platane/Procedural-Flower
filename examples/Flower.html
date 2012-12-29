@@ -17,11 +17,6 @@ transition-duration:0.5s;
 -moz-transition-duration:0.5s;
 background-color: white; 
 border : solid 8px white;
-
-display:inline-block;
-
-
-
 }
 
 body {
@@ -55,35 +50,80 @@ cursor:  default;
 width:300px;
 font-family:Consolas,Calibri;
 font-size:10px;
-display:inline-block;
 }
 </style>
 <title>Procedural Flower</title>
+<script type="text/javascript" src="../src/TimeLine.js"></script>
 <script type="text/javascript" src="../src/Color.js"></script>
 <script type="text/javascript" src="../src/Intervalle.js"></script>
 <script type="text/javascript" src="../src/Soma.js"></script>
 <script type="text/javascript" src="../src/Composition.js"></script>
 <script type="text/javascript" src="../libs/dat.gui.js"></script>
 <script type="text/javascript">
+window.requestAnimFrame = (function(callback){
+    return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback){
+        window.setTimeout(callback, 1000 / 60 );
+    };
+})();
+
+if( ( pseudoRandom = true ) ){
+		// change the behavior of the random function
+		var _seed = 45678951585432565678;
+		_seed = Math.floor( Math.random() * 10000000000 );
+		var _offset = _seed;
+		Math.random = function(){
+				
+			var s = _seed;
+			var square = s *s;
+			
+			var nseed = Math.floor( square / 1000 ) % 10000000000;
+			
+			if( nseed != _seed )
+				_seed = nseed;
+			else
+				_seed = nseed + _offset;
+			return ( _seed / 10000000000 );
+		}
+}
+
 
 window.onload = function(){
 	
 	var option = { widthStart : 3.1, widthEnd : 0.1, colorStart : "#000000", colorEnd : "#575050", maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 37, headSizeVar : 37.5, leafSize : 30, leafSizeVar : 10, headColor : "#081107", headColorTintVar : 30, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : "#20391f", leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.1, strokeBranchWidth : 0, strokeBranchColor : '#000000', strokeLeafWidth : 0.8, strokeLeafColor : '#161616', strokeHeadWidth : 0.9, strokeHeadColor : '#1b1b1b', };
-	var flw;
+	
+	
+	var retraceAsked=false;
+	var retraceLocked=false;
+	var myLittleSeed=_seed;
 	var update=function(){
-		var o=formateOption(option);
-		var s=stringifyOption(o);
-		var s_;
-		while( (s_ = s.replace( "\n" , "<br>" ))!= s )
-			s =s_;
-		document.getElementById('option-text').innerHTML=s;
-		for(var i in o)
-			flw._root._option[i]=o[i];
-		if( o.growVelocity && typeof(o.growVelocity) == "number" ){
-			flw._growSpeed = option.growVelocity;
-			flw._scrollCalculatorTimer = -100;
-			flw._scrollCalculatorInterval = 200;
+		retraceAsked=true;
+		document.getElementById('option-text').innerHTML=stringifyOption(formateOption(option));
+	};
+	
+	window.onmousedown = function(){
+		retraceLocked=true;
+	};
+	window.onmouseup = function(){
+		retraceLocked=false;
+		if( retraceAsked ){
+			retrace();
+			retraceAsked=false;
 		}
+	};
+	
+	
+	var retrace=function(){
+		_seed=myLittleSeed;
+		var e = document.getElementById('container');
+		var c = e.childNodes;
+		while( e.childNodes.length > 0 )
+			e.removeChild( c[0] );
+		Flw.LimitedFlower.create( e , formateOption(option) , true  );
 	};
 	var stringifyOption=function(o){
 		var s="{\n";
@@ -167,47 +207,24 @@ window.onload = function(){
 		
 	})(this);
 	
-	var e = document.getElementById('container');
-	flw = Flw.RampantFlower.create( e , formateOption(option) , true );
-	update();
+	document.getElementById('container').onclick=function(){
+		myLittleSeed=_seed;
+		var e = document.getElementById('container');
+		var c = e.childNodes;
+		while( e.childNodes.length > 0 )
+			e.removeChild( c[0] );
+		Flw.LimitedFlower.create( e , formateOption(option) , true );
+	};
 	
-	// drag and drop
-		(function(){
-			var e = document.getElementById('container');
-			var anchorM = { x : 0 , y : 0 };
-			var anchorE = { x : 0 , y : 0 };
-			var savedBoxShadow;
-			var drag = false;
-			e.onmousedown = function(ev){
-				if( drag )
-					return;
-				anchorM.x = ev.pageX;
-				anchorM.y = ev.pageY;
-				anchorE.x = parseInt( (/^[-0-9]*/).exec(  e.style.left )[0] );
-				anchorE.y = parseInt( (/^[-0-9]*/).exec(  e.style.top  )[0] );
-				drag = true;
-			}
-			
-			document.body.onmousemove = function(ev){
-				if( !drag )
-					return;
-				e.style.left = Math.round( anchorE.x + ev.pageX - anchorM.x )+"px";
-				e.style.top  = Math.round( anchorE.y + ev.pageY - anchorM.y )+"px";
-				
-			}
-			e.onmouseup = function(ev){
-				drag = false;
-			}
-		})();
+	update();
 }
 </script>
 </head>
 <body >
 
+<div id="container" class="tableau" style="height:600px;width:400px;position:absolute;left:350px;top:30px;" > <div class="gravure" style="bottom:1px;right:20px;">Platane</div> </div>
+
 <div id="option-text" ></div>
-
-<div id="container" class="tableau" style="height:600px;width:400px;position:absolute;top:30px;left:300px;" > <div class="gravure" style="bottom:1px;right:20px;">Platane</div> </div>
-
 
 
 </body>
