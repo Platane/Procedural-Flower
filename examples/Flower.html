@@ -53,11 +53,7 @@ font-size:10px;
 }
 </style>
 <title>Procedural Flower</title>
-<script type="text/javascript" src="../src/TimeLine.js"></script>
-<script type="text/javascript" src="../src/Color.js"></script>
-<script type="text/javascript" src="../src/Intervalle.js"></script>
-<script type="text/javascript" src="../src/Soma.js"></script>
-<script type="text/javascript" src="../src/Composition.js"></script>
+<script type="text/javascript" src="../build/Flw.min.js"></script>
 <script type="text/javascript" src="../libs/dat.gui.js"></script>
 <script type="text/javascript">
 window.requestAnimFrame = (function(callback){
@@ -102,9 +98,13 @@ window.onload = function(){
 	var myLittleSeed=_seed;
 	var update=function(){
 		retraceAsked=true;
-		document.getElementById('option-text').innerHTML=stringifyOption(formateOption(option));
+		var o=formateOption(option);
+		var s=stringifyOption(o);
+		var s_;
+		while( (s_ = s.replace( "\n" , "<br>" ))!= s )
+			s =s_;
+		document.getElementById('option-text').innerHTML=s;
 	};
-	
 	window.onmousedown = function(){
 		retraceLocked=true;
 	};
