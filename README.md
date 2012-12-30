@@ -41,7 +41,7 @@ var flower = Flw.RampantFlower.create( container , option , runByMySelf );
 
 A flower that never stop growing. The window scroll to keep view on the top of the stem.
 
-[RampantFlower example](http://platane.github.com/Procedural-Flower/examples/ControledFlower.html)
+[ControledFlower example](http://platane.github.com/Procedural-Flower/examples/ControledFlower.html)
 
 Use the following syntax to set up the flower:
 ```
