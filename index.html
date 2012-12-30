@@ -1,37 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Procedural-flower : " />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Procedural-flower by Platane</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Procedural-flower</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Procedural-flower</h1>
+        <p class="header"></p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Platane/Procedural-Flower">View on GitHub</a>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/Platane/Procedural-Flower/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/Platane/Procedural-Flower/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/Platane/Procedural-Flower">View On GitHub</a></li>
+        </ul>
 
-          <h1 id="project_title">Procedural-flower</h1>
-          <h2 id="project_tagline"></h2>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/Platane">Platane</a></p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Platane/Procedural-Flower/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Platane/Procedural-Flower/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Procedural Flower</h3>
+      </header>
+      <section>
+        <h1>Procedural Flower</h1>
 
 <p>Animate the growth and bloom of a flower procedurally generated.</p>
 
@@ -39,7 +38,7 @@
 
 <p>The library allow you to set up three kind of flower:</p>
 
-<h1>Flw.LimitedFlower</h1>
+<h3>Flw.LimitedFlower</h3>
 
 <p>A basic flower, it grow by itself and stop when it reach it final form.</p>
 
@@ -54,25 +53,40 @@ var flower = Flw.LimitedFlower.create( container , option , runByMySelf );
 <p>option is a set of key/value. See example for futher informations.
 runByMySelf, if true the flower will use requestAnimationFrame to update itself by the time.</p>
 
-<h3>Authors and Contributors</h3>
+<h3>Flw.RampantFlower</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>This flower have been writed to serve as a loading indication. It receive ponctuals notification of the loadin process. It is able to interpolate the progress curve between two notifications. </p>
 
-<h3>Support or Contact</h3>
+<p><a href="http://platane.github.com/Procedural-Flower/examples/Rampant%20Flower.html">RampantFlower example</a></p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Use the following syntax to set up the flower:</p>
+
+<pre><code>var container = document.getElementById('container');
+var flower = Flw.RampantFlower.create( container , option , runByMySelf );
+</code></pre>
+
+<h3>Flw.ControledFlower</h3>
+
+<p>A flower that never stop growing. The window scroll to keep view on the top of the stem.</p>
+
+<p><a href="http://platane.github.com/Procedural-Flower/examples/Controled%20Flower.html">RampantFlower example</a></p>
+
+<p>Use the following syntax to set up the flower:</p>
+
+<pre><code>var container = document.getElementById('container');
+var flower = Flw.ControledFlower.create( container , option  );
+</code></pre>
+
+<h3>Author</h3>
+
+<p>I am the author, I am <a href="https://github.com/Platane" class="user-mention">@Platane</a>.
+See me at <a href="http://arthur-brongniart.fr/">arthur-brongniart.fr</a></p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Procedural-flower maintained by <a href="https://github.com/Platane">Platane</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-
-    
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
