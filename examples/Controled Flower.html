@@ -1,0 +1,183 @@
+<html>
+<head>
+<style type="text/css">
+.tableau {
+
+border-radius:15px;
+/*box-shadow:0 0 20px -0px #999 inset, 0 0 30px -0px #444;*/
+height:1000px;
+width:400px;
+position:absolute;
+
+transition-property:box-shadow;
+-webkit-transition-property:box-shadow;
+-moz-transition-property:box-shadow;
+transition-duration:0.5s;
+-webkit-transition-duration:0.5s;
+-moz-transition-duration:0.5s;
+background-color: white; 
+
+}
+
+body {
+    background: rgb(215, 215, 215);
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
+    background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    background:    -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    background:     -ms-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    background:      -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    background:         radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));   
+
+	background-repeat:no-repeat;
+	background-attachment:fixed;	
+}
+
+.gravure {
+-moz-user-select: none;
+-webkit-user-select: none;
+user-select: none;
+
+font-family:calibri;
+
+z-index: 10;
+color: #333030;
+font-style: italic;
+position: absolute;
+cursor:  default;
+}
+</style>
+<title>Procedural Flower</title>
+<script type="text/javascript" src="../build/Flw.min.js"></script>
+<script type="text/javascript">
+window.requestAnimFrame = (function(callback){
+    return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback){
+        window.setTimeout(callback, 1000 / 60 );
+    };
+})();
+
+window.onload = function(){
+
+	var ee = document.getElementById('container');
+	var fl = Flw.ControledFlower.create( ee );
+
+	// ardoise
+	(function(scope){
+		var e = document.getElementById('graph');
+		var canvas = document.createElement("canvas");
+		canvas.width=300;
+		canvas.height=300;
+		canvas.style.width="300px";
+		canvas.style.height="300px";
+		var ctx = canvas.getContext("2d");
+		e.appendChild( canvas );
+		var ardoise = [];
+		var updateArdoise = function(){
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+			
+			var ts=Infinity,
+				te=-Infinity;
+			var i=ardoise.length;
+			while( i-- ){
+				if( ardoise[i].t<ts )
+					ts=ardoise[i].t;
+				if( ardoise[i].t>te )
+					te=ardoise[i].t;
+			}
+			ts-=50;
+			te+=50;
+			te=Math.max( ts+10000 , te );
+			var i=ardoise.length;
+			while( i-- ){
+				ctx.beginPath();
+				ctx.arc( (ardoise[i].t-ts)/(te-ts) * canvas.width , ( ardoise[i].s * 0.9 + 0.05 ) * canvas.height , ardoise[i].r , 0 , Math.PI*2 );
+				ctx.fillStyle = ardoise[i].c;
+				ctx.fill();
+			}
+		};
+		scope.updateArdoise = updateArdoise;
+		scope.ardoise = ardoise;
+	})(this);
+	
+	// object that receive the calBack from the estimator, it update the graph and the progress barres
+	var receiver = {
+		s:0,
+		plus:function(d){
+			this.s+=d;
+			this.draw();
+			document.getElementById('interpol-barre').setAttribute( "value" , (this.s)*100 );
+		},
+		draw:function(){
+			var t = (new Date()).getTime()
+			ardoise.push({t:t,s:1-this.s,r:1.2,c:"#ab23Ae"});
+			updateArdoise();
+		},
+	}
+	var estimator = Flw.PredictiveInterpolar.create( {f:receiver.plus,o:receiver} , true );
+	
+	
+	
+	var lastTick = null;
+	window.onclick = function(){
+		if( !lastTick ){
+			lastTick = (new Date()).getTime();
+		}
+		var t = (new Date()).getTime();
+		var d = t - lastTick;
+		lastTick = t;
+		
+		//var s = document.getElementById('velocity').value;
+		var s = 0.0001;
+		
+		estimator.tick( d*s );
+		fl.tick(d*s );
+		document.getElementById('non-interpol-barre').setAttribute( "value" , (estimator._reelCursor)*100 );
+		var t = (new Date()).getTime()
+		ardoise.push({t:t,s:1-estimator._reelCursor,r:3,c:"#901234"});
+		updateArdoise();
+	}
+	
+	/*
+	var lastTick = startTime;
+	var cycle = function(){
+		if( Math.random() > 0.99 ){
+			var t = (new Date()).getTime();
+			var d = t - lastTick;
+			lastTick = t;
+			estimator.tick( d*0.0001 );
+			fl.tick(d*0.0001);
+			document.getElementById('non-interpol-barre').setAttribute( "value" , (estimator._reelCursor)*100 );
+			var t = (new Date()).getTime()
+			ardoise.push({t:t,s:1-estimator._reelCursor,r:2,c:"#901234"});
+			updateArdoise();
+		}
+		if( estimator._reelCursor < 1  )
+			window.requestAnimFrame( function(){
+				cycle();
+			} );
+	};
+	cycle();
+	*/
+	
+}
+</script>
+</head>
+<body >
+
+<div id="graph" style="z-index:900;"></div>
+<div id="container" class="tableau" style="height:600px;width:400px;position:absolute;left:350px;top:30px;" > <div class="gravure" style="bottom:1px;right:20px;">Platane</div> </div>
+<progress id="non-interpol-barre" max="100" value="0" ></progress>
+<br>
+<br>
+<progress id="interpol-barre" max="100" value="0" ></progress>
+
+
+
+
+
+</body>
+</html>
