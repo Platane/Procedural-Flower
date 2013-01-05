@@ -39,7 +39,7 @@ var flower = Flw.RampantFlower.create( container , option , runByMySelf );
 
 ### Flw.ControledFlower
 
-This flower have been writed to serve as a loading indication. It receive ponctuals notification of the loadin process. It is able to interpolate the progress curve between two notifications. 
+This flower have been writed to serve as a loading indication. It receive ponctual notifications of the loadin process. It is able to interpolate the progress curve between two notifications. 
 
 [ControledFlower example](http://platane.github.com/Procedural-Flower/examples/ControledFlower.html)
 
