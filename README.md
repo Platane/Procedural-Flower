@@ -6,12 +6,12 @@ Animate the growth and bloom of a flower procedurally generated.
 
 Flowers are drawn with HTML5 native canvas drawing API. These are easy to set up. Specify a HTML container and the script will do the rest! These are also hightly customisable.
 
-The library allow you to set up three kind of flower:
+The library allows you to set up three kind of flower:
 
 
 ### Flw.LimitedFlower
 
-A basic flower, it grow by itself and stop when it reach it final form.
+A basic flower, it grows by itself and stop when it reaches its final form.
 
 [LimitedFlower example](http://platane.github.com/Procedural-Flower/examples/LimitedFlower.html)
 
@@ -21,13 +21,13 @@ var container = document.getElementById('container');
 var flower = Flw.LimitedFlower.create( container , option , runByMySelf );
 ```
 
-option is a set of key/value. See example for futher informations.
-runByMySelf, if true the flower will use requestAnimationFrame to update itself by the time.
+option is a set of key/value. See examples for futher informations.
+runByMySelf, if true the flower will use requestAnimationFrame to update itself. If false, consider to call the method flower.cycle( delta_ms ).
 
 
 ### Flw.RampantFlower
 
-A flower that never stop growing. The window scroll to keep view on the top of the stem.
+A flower that never stops growing. The window scrolls to keep view on the top of the stem.
 
 [RampantFlower example](http://platane.github.com/Procedural-Flower/examples/RampantFlower.html)
 
