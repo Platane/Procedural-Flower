@@ -27,7 +27,7 @@ runByMySelf, if true the flower will use requestAnimationFrame to update itself 
 
 ### Flw.RampantFlower
 
-This flower have been writed to serve as a loading indication. It receive ponctuals notification of the loadin process. It is able to interpolate the progress curve between two notifications. 
+A flower that never stop growing. The window scroll to keep view on the top of the stem.
 
 [RampantFlower example](http://platane.github.com/Procedural-Flower/examples/RampantFlower.html)
 
@@ -39,7 +39,7 @@ var flower = Flw.RampantFlower.create( container , option , runByMySelf );
 
 ### Flw.ControledFlower
 
-A flower that never stop growing. The window scroll to keep view on the top of the stem.
+This flower have been writed to serve as a loading indication. It receive ponctuals notification of the loadin process. It is able to interpolate the progress curve between two notifications. 
 
 [ControledFlower example](http://platane.github.com/Procedural-Flower/examples/ControledFlower.html)
 
@@ -47,5 +47,12 @@ Use the following syntax to set up the flower:
 ```
 var container = document.getElementById('container');
 var flower = Flw.ControledFlower.create( container , option  );
+```
+
+And notify the progression:
+```
+var deltaProgress = 1;
+var maxProgress = 100;
+flower.tick( deltaProgress / maxProgress );
 ```
 
