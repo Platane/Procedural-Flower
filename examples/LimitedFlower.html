@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta name="author" content="Arthur Brongniart">
 <style type="text/css">
 .tableau {
 
@@ -63,12 +64,12 @@ if( ( pseudoRandom = true ) ){
 		_seed = Math.floor( Math.random() * 10000000000 );
 		var _offset = _seed;
 		Math.random = function(){
-				
+
 			var s = _seed;
 			var square = s *s;
-			
+
 			var nseed = Math.floor( square / 1000 ) % 10000000000;
-			
+
 			if( nseed != _seed )
 				_seed = nseed;
 			else
@@ -79,22 +80,22 @@ if( ( pseudoRandom = true ) ){
 
 
 window.onload = function(){
-	
-	var option = { widthStart : 4.4, widthEnd : 0.8, colorStart : '#153906' , colorEnd : '#52910b', maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 37, headSizeVar : 37.5, leafSize : 30, leafSizeVar : 10, headColor : '#2f090d' , headColorTintVar : 28.3, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : '#246410' , leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.195, strokeBranchWidth : 0, strokeBranchColor : '#5c5c5c', strokeLeafWidth : 0.1, strokeLeafColor : '#161616', strokeHeadWidth : 0.2, strokeHeadColor : '#1b1b1b',example : "greenHill" }
-	var examples = {
+
+	var option = { widthStart : 4.4, widthEnd : 0.8, colorStart : '#153906' , colorEnd : '#52910b', maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 37, headSizeVar : 37.5, leafSize : 30, leafSizeVar : 10, headColor : '#2f090d' , headColorTintVar : 28.3, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : '#246410' , leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.195, strokeBranchWidth : 0, strokeBranchColor : '#5c5c5c', strokeLeafWidth : 0.1, strokeLeafColor : '#161616', strokeHeadWidth : 0.2, strokeHeadColor : '#1b1b1b',preset : "greenHill" }
+	var presets = {
 		greenHill : { widthStart : 4.4, widthEnd : 0.8, colorStart : '#153906' , colorEnd : '#52910b', maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 37, headSizeVar : 37.5, leafSize : 30, leafSizeVar : 10, headColor : '#2f090d' , headColorTintVar : 28.3, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : '#246410' , leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.195, strokeBranchWidth : 0, strokeBranchColor : '#5c5c5c', strokeLeafWidth : 0.1, strokeLeafColor : '#161616', strokeHeadWidth : 0.2, strokeHeadColor : '#1b1b1b'},
 		rainbow : { widthStart : 4.4, widthEnd : 0.8, colorStart : Flw.Color.createWithHex( '#798cbb' ), colorEnd : Flw.Color.createWithHex( '#949693' ), maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 52.900000000000006, headSizeVar : 37.5, leafSize : 30, leafSizeVar : 10, headColor : Flw.Color.createWithHex( '#89000e' ), headColorTintVar : 360, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : Flw.Color.createWithHex( '#405ea7' ), leafColorTintVar : 360, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.195, strokeBranchWidth : 0, strokeBranchColor : '#5c5c5c', strokeLeafWidth : 0.1, strokeLeafColor : '#161616', strokeHeadWidth : 0, strokeHeadColor : '#000000', },
 		submarine : { widthStart : 4.4, widthEnd : 0.4, colorStart : Flw.Color.createWithHex( '#14378c' ), colorEnd : Flw.Color.createWithHex( '#358dca' ), maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 64, headSizeVar : 37.5, leafSize : 40.800000000000004, leafSizeVar : 10, headColor : Flw.Color.createWithHex( '#aa5000' ), headColorTintVar : 8.1, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : Flw.Color.createWithHex( '#222a34' ), leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.14100000000000001, strokeBranchWidth : 1.1225444020043625, strokeBranchColor : '#141313', strokeLeafWidth : 1.1, strokeLeafColor : '#070707', strokeHeadWidth : 1.6, strokeHeadColor : '#181818', },
 		ashes : { widthStart : 5.2, widthEnd : 0.8, colorStart : Flw.Color.createWithHex( '#2f312e' ), colorEnd : Flw.Color.createWithHex( '#c8c8c8' ), maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 52.900000000000006, headSizeVar : 26.5, leafSize : 18.8, leafSizeVar : 6.6000000000000005, headColor : Flw.Color.createWithHex( '#000000' ), headColorTintVar : 28.3, headColorValueVar : 0.168, headColorSatVar : 0.11, leafColor : Flw.Color.createWithHex( '#462f38' ), leafColorTintVar : 24.200000000000003, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.195, strokeBranchWidth : 0.6735266412026175, strokeBranchColor : '#000000', strokeLeafWidth : 1.3, strokeLeafColor : '#161616', strokeHeadWidth : 1.2000000000000002, strokeHeadColor : '#1b1b1b', },
 		liseron: { widthStart : 5, widthEnd : 0.1, colorStart : Flw.Color.createWithHex( '#1c1c1c' ), colorEnd : Flw.Color.createWithHex( '#b3b3b3' ), maxDeepness : 3, maxDeepnessVar : 2, maxDeepnessTwisted : 5, maxDeepnessTwistedVar : 0, maxDeepnessMajor : 2, maxDeepnessMajorVar : 2, maxDeepnessMaster : 5, maxDeepnessMasterVar : 4, headSize : 46.300000000000004, headSizeVar : 22.1, leafSize : 30, leafSizeVar : 10, headColor : Flw.Color.createWithHex( '#40433d' ), headColorTintVar : 12.100000000000001, headColorValueVar : 0.079, headColorSatVar : 0.168, leafColor : Flw.Color.createWithHex( '#538026' ), leafColorTintVar : 10, leafColorValueVar : 0.2, leafColorSatVar : 0.2, radius : 55, radiusVar : 70, globalDirection : 1.5707963267948966, growVelocity : 0.184, strokeBranchWidth : 0, strokeBranchColor : '#000000', strokeLeafWidth : 1.8, strokeLeafColor : '#000000', strokeHeadWidth : 1.1, strokeHeadColor : '#000000', },
-		
+
 	};
-	
+
 	var retraceAsked=false;
 	var retraceLocked=false;
 	var myLittleSeed=_seed;
 	var update=function(){
-		option.example="";
+		option.preset="";
 		retraceAsked=true;
 		var o=formateOption(option);
 		var s=stringifyOption(o);
@@ -104,13 +105,13 @@ window.onload = function(){
 		document.getElementById('option-text').innerHTML=s;
 	};
 	var updateExample=function(e){
-		for(var j in examples[option.example])
-			if( examples[option.example][j] instanceof Flw.Color )
-				option[j]=examples[option.example][j].toString();
+		for(var j in presets[option.preset])
+			if( presets[option.preset][j] instanceof Flw.Color )
+				option[j]=presets[option.preset][j].toString();
 			else
-				option[j]=examples[option.example][j];
+				option[j]=presets[option.preset][j];
 		update();
-		option.example=e;
+		option.preset=e;
 		updateAllGUI();
 	};	
 	window.onmousedown = function(){
@@ -123,8 +124,8 @@ window.onload = function(){
 			retraceAsked=false;
 		}
 	};
-	
-	
+
+
 	var retrace=function(){
 		_seed=myLittleSeed;
 		var e = document.getElementById('container');
@@ -149,7 +150,7 @@ window.onload = function(){
 	var formateOption=function(o){
 		var foption = {};
 		for( var i in o )
-			if( i!="example" )
+			if( i!="preset" )
 				foption[i]=o[i];
 		var color = [
 			"colorStart",
@@ -162,12 +163,12 @@ window.onload = function(){
 			foption[color[i]]=Flw.Color.createWithHex(o[color[i]]);
 		return foption;
 	};
-	
+
 	(function(scope){
-		
-		
+
+
 		var gui = new dat.GUI();
-		
+
 		var head = gui.addFolder('Head');
 	    head.add(option,'headSize').min(0).max(200).step(0.1).onChange(update);
 		head.add(option,'headSizeVar').min(0).max(200).step(0.1).onChange(update);
@@ -179,7 +180,7 @@ window.onload = function(){
 		var headStroke=head.addFolder('stroke');
 		headStroke.add(option,'strokeHeadWidth').min(0).max(5).step(0.1).onChange(update);
 		headStroke.addColor(option,'strokeHeadColor').onChange(update);
-		
+
 		var branch = gui.addFolder('Branch');
 		branch.add(option,'radius').min(0).max(200).step(0.1).onChange(update);
 		branch.add(option,'radiusVar').min(0).max(200).step(0.1).onChange(update);
@@ -199,7 +200,7 @@ window.onload = function(){
 	    branchSegments.add(option,'maxDeepnessMasterVar').min(0).max(20).step(0.1).onChange(update);
 		branchSegments.add(option,'maxDeepnessTwisted').min(0).max(20).step(1).onChange(update);
 	    branchSegments.add(option,'maxDeepnessTwistedVar').min(0).max(20).step(0.1).onChange(update);
-		
+
 		var leaf = gui.addFolder('Leaf');
 	    leaf.add(option,'leafSize').min(0).max(100).step(0.1).onChange(update);
 		leaf.add(option,'leafSizeVar').min(0).max(100).step(0.1).onChange(update);
@@ -211,13 +212,13 @@ window.onload = function(){
 		var leafStroke=leaf.addFolder('stroke');
 		leafStroke.add(option,'strokeLeafWidth').min(0).max(5).step(0.1).onChange(update);
 		leafStroke.addColor(option,'strokeLeafColor').onChange(update);
-		
+
 		gui.add(option,'growVelocity').min(0).max(1).step(0.001).onChange(update);
 		var ex = [];
-		for( var i in examples )
+		for( var i in presets )
 			ex.push( i );
-		gui.add(option,'example' , ex ).onChange(updateExample);
-		
+		gui.add(option,'preset' , ex ).onChange(updateExample);
+
 		scope.updateGUI=function(){
 			for (var i in gui.__controllers) 
 				gui.__controllers[i].updateDisplay();
@@ -232,7 +233,7 @@ window.onload = function(){
 			reccursiveUpdateGUI( gui );
 		};
 	})(this);
-	
+
 	document.getElementById('container').onclick=function(){
 		myLittleSeed=_seed;
 		var e = document.getElementById('container');
@@ -241,7 +242,8 @@ window.onload = function(){
 			e.removeChild( c[0] );
 		Flw.LimitedFlower.create( e , formateOption(option) , true );
 	};
-	
+
+	update();
 	retrace();
 }
 </script>
