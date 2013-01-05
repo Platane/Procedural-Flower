@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta name="author" content="Arthur Brongniart">
 <style type="text/css">
 .tableau {
 
@@ -140,28 +141,6 @@ window.onload = function(){
 		ardoise.push({t:t,s:1-estimator._reelCursor,r:3,c:"#901234"});
 		updateArdoise();
 	}
-	
-	/*
-	var lastTick = startTime;
-	var cycle = function(){
-		if( Math.random() > 0.99 ){
-			var t = (new Date()).getTime();
-			var d = t - lastTick;
-			lastTick = t;
-			estimator.tick( d*0.0001 );
-			fl.tick(d*0.0001);
-			document.getElementById('non-interpol-barre').setAttribute( "value" , (estimator._reelCursor)*100 );
-			var t = (new Date()).getTime()
-			ardoise.push({t:t,s:1-estimator._reelCursor,r:2,c:"#901234"});
-			updateArdoise();
-		}
-		if( estimator._reelCursor < 1  )
-			window.requestAnimFrame( function(){
-				cycle();
-			} );
-	};
-	cycle();
-	*/
 	
 }
 </script>
