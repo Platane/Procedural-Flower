@@ -13,7 +13,7 @@ The library allows you to set up three kind of flower:
 
 A basic flower, it grows by itself and stop when it reaches its final form.
 
-[LimitedFlower example](http://platane.github.com/Procedural-Flower/examples/LimitedFlower.html)
+[LimitedFlower example](http://platane.github.io/Procedural-Flower/examples/LimitedFlower.html)
 
 Use the following syntax to set up the flower:
 ```
@@ -29,7 +29,7 @@ runByMySelf, if true the flower will use requestAnimationFrame to update itself.
 
 A flower that never stops growing. The window scrolls to keep view on the top of the stem.
 
-[RampantFlower example](http://platane.github.com/Procedural-Flower/examples/RampantFlower.html)
+[RampantFlower example](http://platane.github.io/Procedural-Flower/examples/RampantFlower.html)
 
 Use the following syntax to set up the flower:
 ```
@@ -41,7 +41,7 @@ var flower = Flw.RampantFlower.create( container , option , runByMySelf );
 
 This flower have been writed to serve as a loading indication. It receive ponctual notifications of the loadin process. It is able to interpolate the progress curve between two notifications. 
 
-[ControledFlower example](http://platane.github.com/Procedural-Flower/examples/ControledFlower.html)
+[ControledFlower example](http://platane.github.io/Procedural-Flower/examples/ControledFlower.html)
 
 Use the following syntax to set up the flower:
 ```
